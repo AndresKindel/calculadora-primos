@@ -37,7 +37,7 @@ function InputForm() {
           <Cell xs={12}>
             <HFlow justifyContent="center">
               <Button type="submit" kind="primary">
-                Submit
+                Calcular
               </Button>
             </HFlow>
           </Cell>
