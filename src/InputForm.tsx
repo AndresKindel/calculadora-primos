@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Button, Cell, Grid, HFlow, TextField } from 'bold-ui'
+import { Button, Cell, Grid, HFlow, TextField, VFlow } from 'bold-ui'
 import React, { useState } from 'react'
 
 function InputForm() {
@@ -21,27 +21,29 @@ function InputForm() {
   }
 
   return (
-    <div css={formStyles}>
-      <form onSubmit={handleSubmit}>
-        <Grid>
-          <Cell xs={6}>
+    <form onSubmit={handleSubmit}>
+      <Grid style={formStyles}>
+        <VFlow>
+          <Cell xs={12}>
             <TextField
               name="input"
               label="Insira um número inteiro entre 1 e X"
+              clearable={false}
               value={formState.input}
               onChange={handleInputChange}
+              required
             />
           </Cell>
           <Cell xs={12}>
-            <HFlow justifyContent="flex-end">
+            <HFlow justifyContent="center">
               <Button type="submit" kind="primary">
                 Submit
               </Button>
             </HFlow>
           </Cell>
-        </Grid>
-      </form>
-    </div>
+        </VFlow>
+      </Grid>
+    </form>
   )
 }
 
@@ -53,7 +55,6 @@ const formStyles = css`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 `
