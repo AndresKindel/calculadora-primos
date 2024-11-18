@@ -1,0 +1,12 @@
+type Mutation {
+    processNumber(input: Input): Resultado
+}
+
+input Input {
+    number: Int!
+}
+
+type Resultado {
+    numeroPrimos: Int
+    tempoDeCalculo: Int
+}
