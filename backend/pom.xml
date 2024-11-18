@@ -48,6 +48,13 @@
 			<artifactId>kotlin-reflect</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>io.mockk</groupId>
+			<artifactId>mockk</artifactId>
+			<version>1.13.13</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
 		</dependency>
