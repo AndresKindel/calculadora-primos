@@ -1,7 +1,6 @@
 package com.example.backend.utils
 
-class CalculadoraPrimos {
-    companion object {
+object CalculadoraPrimos {
         fun contarPrimos(n: Int): Int {
             if (n < 2) {
                 return 0
@@ -17,13 +16,13 @@ class CalculadoraPrimos {
                 }
             }
 
-            var contador = 0
-            for (i in 2..n) {
-                if (ehPrimo[i]) {
-                    contador++
-                }
-            }
-            return contador
+            return (2..n).count { ehPrimo[it] }
         }
-    }
+        fun <T> contarTempo(block: () -> T): Pair<T, Int> {
+            val comeco = System.currentTimeMillis()
+            val resultado = block()
+            val fim = System.currentTimeMillis()
+            val tempoDeCalculo = fim - comeco
+            return Pair(resultado, tempoDeCalculo.toInt())
+        }
 }
