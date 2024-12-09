@@ -1,0 +1,12 @@
+type Query {
+    processarNumero(input: LimiteContagem): ResultadoContagem
+}
+
+input LimiteContagem {
+    numero: Int!
+}
+
+type ResultadoContagem {
+    numeroPrimos: Int
+    tempoDeCalculo: Int
+}
