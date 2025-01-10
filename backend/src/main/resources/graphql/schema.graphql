@@ -1,12 +1,12 @@
-type Mutation {
-    processNumber(input: Input): Resultado
+type Query {
+    processarNumero(input: LimiteContagem): ResultadoContagem
 }
 
-input Input {
-    number: Int!
+input LimiteContagem {
+    numero: Int!
 }
 
-type Resultado {
+type ResultadoContagem {
     numeroPrimos: Int
     tempoDeCalculo: Int
 }
