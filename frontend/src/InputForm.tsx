@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
+import { useMutation } from '@apollo/client'
 import { css } from '@emotion/react'
 import { Button, Cell, Grid, HFlow, TextField, VFlow } from 'bold-ui'
 import React, { useState } from 'react'
+import { PROCESS_NUMBER_MUTATION } from './graphql/processNumberMutation'
 
 function InputForm() {
   const [formState, setFormState] = useState('')
+  const [processNumber] = useMutation(PROCESS_NUMBER_MUTATION)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -13,9 +16,20 @@ function InputForm() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert('Enviado: ' + formState)
+    try {
+      const { data } = await processNumber({
+        variables: { input: { number: parseInt(formState, 10) } },
+      })
+      alert(`
+        Número de primos: ${data.processNumber.numeroPrimos}
+        Tempo de cálculo: ${data.processNumber.tempoDeCalculo}ns
+        Data do cálculo: ${data.processNumber.dataDoCalculo}
+      `)
+    } catch (e) {
+      console.error('Erro ao processar o número:', e)
+    }
   }
 
   return (
