@@ -1,5 +1,5 @@
 type Query {
-    processarNumero(input: LimiteContagem): ResultadoContagem
+    processarNumero(input: LimiteContagem!): ResultadoContagem
 }
 
 input LimiteContagem {
@@ -9,4 +9,5 @@ input LimiteContagem {
 type ResultadoContagem {
     numeroPrimos: Int
     tempoDeCalculo: Int
+    dataDoCalculo: String
 }

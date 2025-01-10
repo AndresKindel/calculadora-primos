@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { useMutation } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { css } from '@emotion/react'
 import { Button, Cell, Grid, HFlow, TextField, VFlow } from 'bold-ui'
 import React, { useState } from 'react'
-import { PROCESS_NUMBER_MUTATION } from './graphql/processNumberMutation'
+import { PROCESSAR_NUMERO_QUERY } from './graphql/processarNumeroQuery'
 
 function InputForm() {
   const [formState, setFormState] = useState('')
-  const [processNumber] = useMutation(PROCESS_NUMBER_MUTATION)
+  const [processarNumero] = useLazyQuery(PROCESSAR_NUMERO_QUERY)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -19,13 +19,14 @@ function InputForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const { data } = await processNumber({
-        variables: { input: { number: parseInt(formState, 10) } },
+      const { data } = await processarNumero({
+        variables: { input: { numero: parseInt(formState, 10) } },
       })
+
       alert(`
-        Número de primos: ${data.processNumber.numeroPrimos}
-        Tempo de cálculo: ${data.processNumber.tempoDeCalculo}ns
-        Data do cálculo: ${data.processNumber.dataDoCalculo}
+        Número de primos: ${data.processarNumero.numeroPrimos}
+        Tempo de cálculo: ${data.processarNumero.tempoDeCalculo}ns
+        Data do cálculo: ${data.processarNumero.dataDoCalculo}
       `)
     } catch (e) {
       console.error('Erro ao processar o número:', e)

@@ -19,9 +19,9 @@ object CalculadoraPrimos {
             return (2..n).count { ehPrimo[it] }
         }
         fun <T> contarTempo(block: () -> T): Pair<T, Int> {
-            val comeco = System.currentTimeMillis()
+            val comeco = System.nanoTime()
             val resultado = block()
-            val fim = System.currentTimeMillis()
+            val fim = System.nanoTime()
             val tempoDeCalculo = fim - comeco
             return Pair(resultado, tempoDeCalculo.toInt())
         }
