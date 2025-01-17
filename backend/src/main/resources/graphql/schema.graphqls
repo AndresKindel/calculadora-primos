@@ -1,13 +1,9 @@
 type Query {
-    processarNumero(input: LimiteContagem!): ResultadoContagem
-}
-
-input LimiteContagem {
-    numero: Int!
+    processarNumero(limiteContagem: Int!): ResultadoContagem
 }
 
 type ResultadoContagem {
-    numeroPrimos: Int
-    tempoDeCalculo: Int
-    dataDoCalculo: String
+    numeroPrimos: Int!
+    tempoDeCalculo: Int!
+    dataDoCalculo: String!
 }
