@@ -4,6 +4,7 @@ import com.example.backend.resolver.model.LimiteContagem
 import com.example.backend.utils.CalculadoraPrimos
 import io.mockk.every
 import io.mockk.mockkObject
+import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -23,6 +24,7 @@ class QueryResolverTest {
 
         val result = queryResolver.processarNumero(input)
 
+        verify(exactly = 1) { CalculadoraPrimos.contarPrimos(inputNumber) }
         assertThat(result.numeroPrimos).isEqualTo(mockResult)
     }
 }
