@@ -4,6 +4,7 @@ import { css } from '@emotion/react'
 import { Button, Cell, Grid, HFlow, TextField, VFlow } from 'bold-ui'
 import React, { useState } from 'react'
 import { PROCESSAR_NUMERO_QUERY } from './graphql/processarNumeroQuery'
+import { formatDateAndHoursMinutes, isNumber } from './utils/utils'
 
 function InputForm() {
   const [formState, setFormState] = useState('')
@@ -20,13 +21,13 @@ function InputForm() {
     e.preventDefault()
     try {
       const { data } = await processarNumero({
-        variables: { input: { numero: parseInt(formState, 10) } },
+        variables: { limiteContagem: parseInt(formState, 10) },
       })
 
       alert(`
         Número de primos: ${data.processarNumero.numeroPrimos}
         Tempo de cálculo: ${data.processarNumero.tempoDeCalculo}ns
-        Data do cálculo: ${data.processarNumero.dataDoCalculo}
+        Data do cálculo: ${formatDateAndHoursMinutes(data.processarNumero.dataDoCalculo)}
       `)
     } catch (e) {
       console.error('Erro ao processar o número:', e)
@@ -61,10 +62,6 @@ function InputForm() {
 }
 
 export default InputForm
-
-function isNumber(value: string) {
-  return /^\d+$/.test(value)
-}
 
 const formStyles = css`
   display: flex;

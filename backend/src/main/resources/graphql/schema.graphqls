@@ -1,9 +1,12 @@
+scalar Long
+scalar Instant
+
 type Query {
     processarNumero(limiteContagem: Int!): ResultadoContagem
 }
 
 type ResultadoContagem {
-    numeroPrimos: Int!
+    numeroPrimos: Long!
     tempoDeCalculo: Int!
-    dataDoCalculo: String!
+    dataDoCalculo: Instant!
 }
