@@ -17,8 +17,8 @@ function InputForm() {
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     try {
       const { data } = await processarNumero({
         variables: { limiteContagem: parseInt(formState, 10) },
@@ -29,8 +29,8 @@ function InputForm() {
         Tempo de cálculo: ${data.processarNumero.tempoDeCalculo}ns
         Data do cálculo: ${formatDateAndHoursMinutes(data.processarNumero.dataDoCalculo)}
       `)
-    } catch (e) {
-      console.error('Erro ao processar o número:', e)
+    } catch (error) {
+      console.error('Erro ao processar o número: ', error)
     }
   }
 
