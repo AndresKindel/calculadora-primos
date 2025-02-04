@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import InputForm from './InputForm'
-import { Helmet } from 'react-helmet'
 import {
   ApolloClient,
   HttpLink,
   InMemoryCache,
   ApolloProvider,
 } from '@apollo/client'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -43,9 +43,11 @@ const rootElement = document.getElementById('root')
 const root = ReactDOM.createRoot(rootElement!)
 root.render(
   <React.StrictMode>
-    <Index />
-    <ApolloProvider client={client}>
-      <InputForm />
-    </ApolloProvider>
+    <HelmetProvider>
+      <Index />
+      <ApolloProvider client={client}>
+        <InputForm />
+      </ApolloProvider>
+    </HelmetProvider>
   </React.StrictMode>
 )

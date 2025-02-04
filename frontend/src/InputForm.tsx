@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { useLazyQuery } from '@apollo/client'
 import { css } from '@emotion/react'
 import { Button, Cell, Grid, HFlow, TextField, VFlow } from 'bold-ui'
 import React, { useState } from 'react'
-import { PROCESSAR_NUMERO_QUERY } from './graphql/processarNumeroQuery'
 import { formatDateAndHoursMinutes, isNumber } from './utils/utils'
+import { useProcessarNumeroLazyQuery } from './gql/generated'
 
 function InputForm() {
   const [formState, setFormState] = useState('')
-  const [processarNumero] = useLazyQuery(PROCESSAR_NUMERO_QUERY)
+  const [processarNumero] = useProcessarNumeroLazyQuery()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -24,11 +23,15 @@ function InputForm() {
         variables: { limiteContagem: parseInt(formState, 10) },
       })
 
-      alert(`
-        Número de primos: ${data.processarNumero.numeroPrimos}
-        Tempo de cálculo: ${data.processarNumero.tempoDeCalculo}ns
-        Data do cálculo: ${formatDateAndHoursMinutes(data.processarNumero.dataDoCalculo)}
-      `)
+      if (data && data.processarNumero) {
+        alert(`
+          Número de primos: ${data.processarNumero.numeroPrimos}
+          Tempo de cálculo: ${data.processarNumero.tempoDeCalculo}ns
+          Data do cálculo: ${formatDateAndHoursMinutes(data.processarNumero.dataDoCalculo)}
+        `)
+      } else {
+        console.error('Erro: Dados retornados são inválidos.')
+      }
     } catch (error) {
       console.error('Erro ao processar o número: ', error)
     }

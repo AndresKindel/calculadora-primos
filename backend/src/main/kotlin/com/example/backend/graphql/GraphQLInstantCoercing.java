@@ -30,7 +30,7 @@ public class GraphQLInstantCoercing implements Coercing<Instant, Long> {
 			return null;
 		}
 
-		BigInteger istant = ((IntValue) input).getValue();
-		return this.parseValue(istant.longValueExact());
+		BigInteger instant = ((IntValue) input).getValue();
+		return this.parseValue(instant.longValueExact());
 	}
 }

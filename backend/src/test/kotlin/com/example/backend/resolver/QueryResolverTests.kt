@@ -15,14 +15,12 @@ class QueryResolverTest {
     @Test
     fun `deve calcular numeros primos e tempo corretamente`() {
         val inputNumber = 10
-        val mockResult = 4
+        val mockResult = 4L
 
         mockkObject(CalculadoraPrimos)
         every { CalculadoraPrimos.contarPrimos(inputNumber) } returns mockResult
 
-        val input = LimiteContagem(numero = inputNumber)
-
-        val result = queryResolver.processarNumero(input)
+        val result = queryResolver.processarNumero(inputNumber)
 
         verify(exactly = 1) { CalculadoraPrimos.contarPrimos(inputNumber) }
         assertThat(result.numeroPrimos).isEqualTo(mockResult)
