@@ -1,8 +1,0 @@
-type Query {
-    processarNumero(limiteContagem: Int!): ResultadoContagem
-}
-
-type ResultadoContagem {
-    numeroPrimos: Int
-    tempoDeCalculo: Int
-}

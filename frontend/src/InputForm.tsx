@@ -2,9 +2,12 @@
 import { css } from '@emotion/react'
 import { Button, Cell, Grid, HFlow, TextField, VFlow } from 'bold-ui'
 import React, { useState } from 'react'
+import { formatDateAndHoursMinutes, isNumber } from './utils/utils'
+import { useProcessarNumeroLazyQuery } from './gql/generated'
 
 function InputForm() {
   const [formState, setFormState] = useState('')
+  const [processarNumero] = useProcessarNumeroLazyQuery()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -13,9 +16,25 @@ function InputForm() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    alert('Enviado: ' + formState)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      const { data } = await processarNumero({
+        variables: { limiteContagem: parseInt(formState, 10) },
+      })
+
+      if (data && data.processarNumero) {
+        alert(`
+          Número de primos: ${data.processarNumero.numeroPrimos}
+          Tempo de cálculo: ${data.processarNumero.tempoDeCalculo} ns
+          Data do cálculo: ${formatDateAndHoursMinutes(data.processarNumero.dataDoCalculo)}
+        `)
+      } else {
+        console.error('Erro: Dados retornados são inválidos.')
+      }
+    } catch (error) {
+      console.error('Erro ao processar o número: ', error)
+    }
   }
 
   return (
@@ -46,10 +65,6 @@ function InputForm() {
 }
 
 export default InputForm
-
-function isNumber(value: string) {
-  return /^\d+$/.test(value)
-}
 
 const formStyles = css`
   display: flex;

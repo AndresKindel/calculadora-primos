@@ -1,3 +1,5 @@
 package com.example.backend.resolver.model
 
-data class ResultadoContagem(val numeroPrimos: Int, val tempoDeCalculo: Int)
+import java.time.Instant
+
+data class ResultadoContagem(val numeroPrimos: Long, val tempoDeCalculo: Int, val dataDoCalculo: Instant)
