@@ -1,6 +1,5 @@
 package com.example.backend.resolver
 
-import com.example.backend.resolver.model.LimiteContagem
 import com.example.backend.utils.CalculadoraPrimos
 import io.mockk.every
 import io.mockk.mockkObject

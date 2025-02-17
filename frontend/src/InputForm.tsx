@@ -26,7 +26,7 @@ function InputForm() {
       if (data && data.processarNumero) {
         alert(`
           Número de primos: ${data.processarNumero.numeroPrimos}
-          Tempo de cálculo: ${data.processarNumero.tempoDeCalculo}ns
+          Tempo de cálculo: ${data.processarNumero.tempoDeCalculo} ns
           Data do cálculo: ${formatDateAndHoursMinutes(data.processarNumero.dataDoCalculo)}
         `)
       } else {

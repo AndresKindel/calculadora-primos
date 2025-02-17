@@ -1,11 +1,10 @@
 package com.example.backend.utils
 
-import kotlin.test.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 import com.example.backend.utils.CalculadoraPrimos.contarPrimos
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class CalculadoraPrimosTest {
     companion object {
@@ -23,7 +22,7 @@ class CalculadoraPrimosTest {
     @MethodSource("valores")
     fun `deve retornar o numero correto de primos`(n: Int, expected: Long) {
         val result = contarPrimos(n)
-        assertEquals(expected, result)
+        assertThat(expected).isEqualTo(result)
     }
 
 }
