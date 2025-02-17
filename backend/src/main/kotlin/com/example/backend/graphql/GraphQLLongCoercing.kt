@@ -61,7 +61,7 @@ class GraphQLLongCoercing : Coercing<Long, Long> {
             }
         } else if (input is IntValue) {
             val value = input.value
-            if (value.compareTo(LONG_MIN) < 0 || value.compareTo(LONG_MAX) > 0) {
+            if (value < LONG_MIN || value > LONG_MAX) {
                 throw CoercingParseLiteralException("Expected value to be in the Long range but it was '$value'")
             }
             return value.toLong()
