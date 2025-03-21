@@ -73,7 +73,7 @@ class GraphQLLongCoercing : Coercing<Long, Long> {
         private val LONG_MAX: BigInteger = BigInteger.valueOf(Long.MAX_VALUE)
         private val LONG_MIN: BigInteger = BigInteger.valueOf(Long.MIN_VALUE)
 
-        fun typeName(input: Any?): String {
+        private fun typeName(input: Any?): String {
             if (input == null) {
                 return "null"
             }
