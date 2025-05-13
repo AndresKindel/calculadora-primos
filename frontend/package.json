@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.11.10",
     "@emotion/react": "^11.13.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -12,18 +13,21 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "bold-ui": "^1.0.0-beta.62",
+    "date-fns": "^4.1.0",
+    "graphql": "^16.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
     "react-scripts": "5.0.1",
-    "typescript": "^4.4.2",
+    "typescript": "^5.7.3",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.4",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.2",
     "@types/react-helmet": "^6.1.11",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",

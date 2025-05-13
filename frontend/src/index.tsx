@@ -1,7 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import InputForm from './InputForm'
-import { Helmet } from 'react-helmet'
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  ApolloProvider,
+} from '@apollo/client'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: 'http://localhost:8080/graphql',
+  }),
+  cache: new InMemoryCache(),
+})
 
 const Index = () => (
   <>
@@ -30,7 +43,11 @@ const rootElement = document.getElementById('root')
 const root = ReactDOM.createRoot(rootElement!)
 root.render(
   <React.StrictMode>
-    <Index />
-    <InputForm />
+    <HelmetProvider>
+      <Index />
+      <ApolloProvider client={client}>
+        <InputForm />
+      </ApolloProvider>
+    </HelmetProvider>
   </React.StrictMode>
 )
